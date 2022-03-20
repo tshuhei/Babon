@@ -11,7 +11,9 @@ import SwiftUI
 struct BabonApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView{
+                StartMenuView()
+            }
         }
     }
 }

@@ -8,17 +8,41 @@
 
 /* Begin PBXBuildFile section */
 		71204A6727E6BC8D003B1972 /* BabonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A6627E6BC8D003B1972 /* BabonApp.swift */; };
-		71204A6927E6BC8D003B1972 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A6827E6BC8D003B1972 /* ContentView.swift */; };
+		71204A6927E6BC8D003B1972 /* StartMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A6827E6BC8D003B1972 /* StartMenuView.swift */; };
 		71204A6B27E6BC95003B1972 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71204A6A27E6BC95003B1972 /* Assets.xcassets */; };
 		71204A6E27E6BC95003B1972 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71204A6D27E6BC95003B1972 /* Preview Assets.xcassets */; };
+		71204A7627E6BF44003B1972 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A7527E6BF44003B1972 /* StartView.swift */; };
+		71204A7827E6CC1B003B1972 /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A7727E6CC1B003B1972 /* HowToPlayView.swift */; };
+		71204A7A27E6CC42003B1972 /* MultiPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A7927E6CC42003B1972 /* MultiPlayView.swift */; };
+		71204A7C27E6D062003B1972 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A7B27E6D062003B1972 /* Board.swift */; };
+		71204A7E27E6D06E003B1972 /* Pawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A7D27E6D06E003B1972 /* Pawn.swift */; };
+		71204A8027E6D0A2003B1972 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A7F27E6D0A2003B1972 /* Player.swift */; };
+		71204A8227E6D0C3003B1972 /* PawnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A8127E6D0C3003B1972 /* PawnView.swift */; };
+		71204A8627E6D158003B1972 /* PlayerSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A8527E6D158003B1972 /* PlayerSide.swift */; };
+		71204A8827E6D82F003B1972 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A8727E6D82F003B1972 /* BoardView.swift */; };
+		71204A8A27E74D9A003B1972 /* BoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A8927E74D9A003B1972 /* BoardCell.swift */; };
+		71204A8C27E74E0E003B1972 /* CellStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A8B27E74E0E003B1972 /* CellStatus.swift */; };
+		71204A8E27E74F75003B1972 /* CellPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A8D27E74F74003B1972 /* CellPosition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		71204A6327E6BC8D003B1972 /* Babon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Babon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71204A6627E6BC8D003B1972 /* BabonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabonApp.swift; sourceTree = "<group>"; };
-		71204A6827E6BC8D003B1972 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		71204A6827E6BC8D003B1972 /* StartMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenuView.swift; sourceTree = "<group>"; };
 		71204A6A27E6BC95003B1972 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71204A6D27E6BC95003B1972 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		71204A7527E6BF44003B1972 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		71204A7727E6CC1B003B1972 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
+		71204A7927E6CC42003B1972 /* MultiPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPlayView.swift; sourceTree = "<group>"; };
+		71204A7B27E6D062003B1972 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		71204A7D27E6D06E003B1972 /* Pawn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pawn.swift; sourceTree = "<group>"; };
+		71204A7F27E6D0A2003B1972 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		71204A8127E6D0C3003B1972 /* PawnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawnView.swift; sourceTree = "<group>"; };
+		71204A8527E6D158003B1972 /* PlayerSide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSide.swift; sourceTree = "<group>"; };
+		71204A8727E6D82F003B1972 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		71204A8927E74D9A003B1972 /* BoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCell.swift; sourceTree = "<group>"; };
+		71204A8B27E74E0E003B1972 /* CellStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellStatus.swift; sourceTree = "<group>"; };
+		71204A8D27E74F74003B1972 /* CellPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellPosition.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,10 +75,16 @@
 		71204A6527E6BC8D003B1972 /* Babon */ = {
 			isa = PBXGroup;
 			children = (
+				71204A7427E6BCB7003B1972 /* Model */,
 				71204A6627E6BC8D003B1972 /* BabonApp.swift */,
-				71204A6827E6BC8D003B1972 /* ContentView.swift */,
+				71204A6827E6BC8D003B1972 /* StartMenuView.swift */,
+				71204A8127E6D0C3003B1972 /* PawnView.swift */,
 				71204A6A27E6BC95003B1972 /* Assets.xcassets */,
 				71204A6C27E6BC95003B1972 /* Preview Content */,
+				71204A7527E6BF44003B1972 /* StartView.swift */,
+				71204A8727E6D82F003B1972 /* BoardView.swift */,
+				71204A7727E6CC1B003B1972 /* HowToPlayView.swift */,
+				71204A7927E6CC42003B1972 /* MultiPlayView.swift */,
 			);
 			path = Babon;
 			sourceTree = "<group>";
@@ -65,6 +95,20 @@
 				71204A6D27E6BC95003B1972 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		71204A7427E6BCB7003B1972 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				71204A7B27E6D062003B1972 /* Board.swift */,
+				71204A7D27E6D06E003B1972 /* Pawn.swift */,
+				71204A7F27E6D0A2003B1972 /* Player.swift */,
+				71204A8527E6D158003B1972 /* PlayerSide.swift */,
+				71204A8927E74D9A003B1972 /* BoardCell.swift */,
+				71204A8D27E74F74003B1972 /* CellPosition.swift */,
+				71204A8B27E74E0E003B1972 /* CellStatus.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +181,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71204A6927E6BC8D003B1972 /* ContentView.swift in Sources */,
+				71204A8827E6D82F003B1972 /* BoardView.swift in Sources */,
+				71204A7A27E6CC42003B1972 /* MultiPlayView.swift in Sources */,
+				71204A7E27E6D06E003B1972 /* Pawn.swift in Sources */,
+				71204A8227E6D0C3003B1972 /* PawnView.swift in Sources */,
+				71204A7827E6CC1B003B1972 /* HowToPlayView.swift in Sources */,
+				71204A7C27E6D062003B1972 /* Board.swift in Sources */,
+				71204A8027E6D0A2003B1972 /* Player.swift in Sources */,
+				71204A8C27E74E0E003B1972 /* CellStatus.swift in Sources */,
+				71204A7627E6BF44003B1972 /* StartView.swift in Sources */,
+				71204A6927E6BC8D003B1972 /* StartMenuView.swift in Sources */,
 				71204A6727E6BC8D003B1972 /* BabonApp.swift in Sources */,
+				71204A8A27E74D9A003B1972 /* BoardCell.swift in Sources */,
+				71204A8E27E74F75003B1972 /* CellPosition.swift in Sources */,
+				71204A8627E6D158003B1972 /* PlayerSide.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
