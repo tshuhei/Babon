@@ -46,7 +46,9 @@ struct BoardView: View {
                         ForEach(1..<4){ subcol in
                             let subcellIndex: Int? = cells.firstIndex(where: {$0.row == subrow && $0.col == subcol && $0.position == .down})
                             Circle()
+                                .strokeBorder(.white, lineWidth: 4)
                                 .frame(width: 40, height: 40)
+                                .background(Circle().fill(cells[subcellIndex!].cellColor))
                                 .onTapGesture{
                                     switch cells[subcellIndex!].cellStatus{
                                     case .neutral:
@@ -63,7 +65,7 @@ struct BoardView: View {
                                     //print("Cell info\nrow: \(subcell!.row)\ncol: \(subcell!.col)\nposition: \(subcell!.position)\nstatus: \(subcell!.cellStatus)\ncolor: \(subcell!.cellColor)\n\n")
                                     //print("subfield row: \(subrow), col: \(subcol)")
                                 }
-                                .foregroundColor(cells[subcellIndex!].cellColor)
+                                //.foregroundColor(cells[subcellIndex!].cellColor)
                         }
                     }
                 }
