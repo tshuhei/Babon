@@ -14,7 +14,6 @@ struct BoardCell{
     var cellStatus: CellStatus
     let position: CellPosition
     var cellColor: Color
-    var isFirst: Bool
     
     init(row: Int, col: Int, position: CellPosition){
         self.row = row
@@ -26,6 +25,5 @@ struct BoardCell{
         }else{
             self.cellColor = Color("downNeutral")
         }
-        self.isFirst = false
     }
 }

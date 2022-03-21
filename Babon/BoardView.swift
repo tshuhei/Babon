@@ -12,12 +12,14 @@ struct BoardView: View {
     @Binding var red: Player
     @Binding var blue: Player
     @Binding var turn: PlayerSide
+    @Binding var isFirst: Bool
     
     init(board: Binding<Board>){
         self._cells = board.cells
         self._red = board.red
         self._blue = board.blue
         self._turn = board.turn
+        self._isFirst = board.isFirst
     }
     
     var body: some View {
@@ -26,33 +28,49 @@ struct BoardView: View {
                 HStack(spacing: 5){
                     ForEach(1..<5){ col in
                         let cellIndex: Int? = cells.firstIndex(where: {$0.row == row && $0.col == col && $0.position == .up})
-                        Rectangle()
-                            .cornerRadius(6)
-                            .frame(width: 60, height: 60)
-                            .onTapGesture {
-                                
-                                switch turn{
-                                case .red:
-                                    if red.numPawnAvailable > 0{
-                                        if cells[cellIndex!].cellStatus == .neutral{
-                                            cells[cellIndex!].cellStatus = .red
-                                            cells[cellIndex!].cellColor = Color("upRed")
-                                            red.numPawnAvailable -= 1
-                                            turn = .blue
+                        ZStack{
+                            Rectangle()
+                                .cornerRadius(6)
+                                .frame(width: 60, height: 60)
+                                .onTapGesture {
+                                    
+                                    if isFirst && ((row != 2 && row != 3) || (col != 2 && col != 3)){
+                                        return
+                                    }
+                                    
+                                    switch turn{
+                                    case .red:
+                                        if red.numPawnAvailable > 0{
+                                            if cells[cellIndex!].cellStatus == .neutral{
+                                                cells[cellIndex!].cellStatus = .red
+                                                cells[cellIndex!].cellColor = Color("upRed")
+                                                red.numPawnAvailable -= 1
+                                                turn = .blue
+                                            }
+                                        }
+                                    case .blue:
+                                        if blue.numPawnAvailable > 0{
+                                            if cells[cellIndex!].cellStatus == .neutral{
+                                                cells[cellIndex!].cellStatus = .blue
+                                                cells[cellIndex!].cellColor = Color("upBlue")
+                                                blue.numPawnAvailable -= 1
+                                                turn = .red
+                                            }
                                         }
                                     }
-                                case .blue:
-                                    if blue.numPawnAvailable > 0{
-                                        if cells[cellIndex!].cellStatus == .neutral{
-                                            cells[cellIndex!].cellStatus = .blue
-                                            cells[cellIndex!].cellColor = Color("upBlue")
-                                            blue.numPawnAvailable -= 1
-                                            turn = .red
-                                        }
+                                    if isFirst{
+                                        isFirst = false
                                     }
                                 }
+                                .foregroundColor(cells[cellIndex!].cellColor)
+                            if (row == 2 || row == 3) && (col == 2 || col == 3){
+                                if isFirst{
+                                    RoundedRectangle(cornerRadius: 4)
+                                        .stroke(Color("downNeutral"), lineWidth: 5)
+                                        .frame(width: 55, height: 55)
+                                }
                             }
-                            .foregroundColor(cells[cellIndex!].cellColor)
+                        }
                     }
                 }
             }
@@ -68,24 +86,25 @@ struct BoardView: View {
                                 .frame(width: 40, height: 40)
                                 .background(Circle().fill(cells[subcellIndex!].cellColor))
                                 .onTapGesture{
-                                    
-                                    switch turn{
-                                    case .red:
-                                        if red.numPawnAvailable > 0{
-                                            if cells[subcellIndex!].cellStatus == .neutral{
-                                                cells[subcellIndex!].cellStatus = .red
-                                                cells[subcellIndex!].cellColor = Color("upRed")
-                                                red.numPawnAvailable -= 1
-                                                turn = .blue
+                                    if !isFirst{
+                                        switch turn{
+                                        case .red:
+                                            if red.numPawnAvailable > 0{
+                                                if cells[subcellIndex!].cellStatus == .neutral{
+                                                    cells[subcellIndex!].cellStatus = .red
+                                                    cells[subcellIndex!].cellColor = Color("upRed")
+                                                    red.numPawnAvailable -= 1
+                                                    turn = .blue
+                                                }
                                             }
-                                        }
-                                    case .blue:
-                                        if blue.numPawnAvailable > 0{
-                                            if cells[subcellIndex!].cellStatus == .neutral{
-                                                cells[subcellIndex!].cellStatus = .blue
-                                                cells[subcellIndex!].cellColor = Color("upBlue")
-                                                blue.numPawnAvailable -= 1
-                                                turn = .red
+                                        case .blue:
+                                            if blue.numPawnAvailable > 0{
+                                                if cells[subcellIndex!].cellStatus == .neutral{
+                                                    cells[subcellIndex!].cellStatus = .blue
+                                                    cells[subcellIndex!].cellColor = Color("upBlue")
+                                                    blue.numPawnAvailable -= 1
+                                                    turn = .red
+                                                }
                                             }
                                         }
                                     }

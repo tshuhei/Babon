@@ -12,6 +12,7 @@ struct Board{
     var red: Player
     var blue: Player
     var turn: PlayerSide
+    var isFirst: Bool
     
     init(){
         self.cells = [
@@ -45,5 +46,6 @@ struct Board{
         self.red = Player(side: .red)
         self.blue = Player(side: .blue)
         self.turn = .blue
+        self.isFirst = true
     }
 }
