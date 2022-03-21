@@ -57,5 +57,6 @@ struct StartMenuView: View {
 struct StartMenuView_Previews: PreviewProvider {
     static var previews: some View {
         StartMenuView()
+            .previewDevice("iPhone 12 mini")
     }
 }

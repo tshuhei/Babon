@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+struct Pawn{
+    var col: Int
+    var row: Int
+    var side: PlayerSide
+    
+    init(side: PlayerSide){
+        self.col = -1
+        self.row = -1
+        self.side = side
+    }
+}

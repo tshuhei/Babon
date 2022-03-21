@@ -8,20 +8,38 @@
 import SwiftUI
 
 struct StartView: View {
-    @State private var cells: [BoardCell] = BoardView_Previews.cells
+    @Environment(\.dismiss) var dismiss
+    @State private var board: Board = Board()
     var body: some View {
-        VStack{
-            PawnView(numPawnAvailable: 2, playerSide: .red)
-            Spacer().frame(height: 30)
-            BoardView(cells: $cells)
-            Spacer().frame(height: 30)
-            PawnView(numPawnAvailable: 1, playerSide: .blue)
+        ZStack{
+            
+            TurnView(turn: $board.turn)
+            
+            VStack{
+                PawnView(numPawnAvailable: $board.red.numPawnAvailable, playerSide: .red)
+                Spacer().frame(height: 30)
+                BoardView(board: $board)
+                Spacer().frame(height: 30)
+                PawnView(numPawnAvailable: $board.blue.numPawnAvailable, playerSide: .blue)
+            }
+            
+            Button(
+                action: {
+                    dismiss()
+                }, label: {
+                    Image(systemName: "arrow.backward")
+                }
+            )
+            .tint(.black)
+            .position(x: 20, y: 10)
         }
+        .navigationBarHidden(true)
     }
 }
 
 struct StartView_Previews: PreviewProvider {
     static var previews: some View {
         StartView()
+            .previewDevice("iPhone 12 mini")
     }
 }

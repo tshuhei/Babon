@@ -9,34 +9,52 @@ import SwiftUI
 
 struct BoardView: View {
     @Binding var cells: [BoardCell]
+    @Binding var red: Player
+    @Binding var blue: Player
+    @Binding var turn: PlayerSide
+    
+    init(board: Binding<Board>){
+        self._cells = board.cells
+        self._red = board.red
+        self._blue = board.blue
+        self._turn = board.turn
+    }
+    
     var body: some View {
         VStack(spacing: 5){
             ForEach(1..<5){ row in
-                    HStack(spacing: 5){
-                        ForEach(1..<5){ col in
-                            let cellIndex: Int? = cells.firstIndex(where: {$0.row == row && $0.col == col && $0.position == .up})
-                            Rectangle()
-                                .cornerRadius(6)
-                                .frame(width: 60, height: 60)
-                                .onTapGesture {
-                                    switch cells[cellIndex!].cellStatus{
-                                    case .neutral:
-                                        cells[cellIndex!].cellStatus = .red
-                                        cells[cellIndex!].cellColor = Color("upRed")
-                                    case .red:
-                                        cells[cellIndex!].cellStatus = .blue
-                                        cells[cellIndex!].cellColor = Color("upBlue")
-                                    case .blue:
-                                        cells[cellIndex!].cellStatus = .neutral
-                                        cells[cellIndex!].cellColor = Color("upNeutral")
+                HStack(spacing: 5){
+                    ForEach(1..<5){ col in
+                        let cellIndex: Int? = cells.firstIndex(where: {$0.row == row && $0.col == col && $0.position == .up})
+                        Rectangle()
+                            .cornerRadius(6)
+                            .frame(width: 60, height: 60)
+                            .onTapGesture {
+                                
+                                switch turn{
+                                case .red:
+                                    if red.numPawnAvailable > 0{
+                                        if cells[cellIndex!].cellStatus == .neutral{
+                                            cells[cellIndex!].cellStatus = .red
+                                            cells[cellIndex!].cellColor = Color("upRed")
+                                            red.numPawnAvailable -= 1
+                                            turn = .blue
+                                        }
                                     }
-                                    
-                                    //print("Cell info\nrow: \(cells[cellIndex!].row)\ncol: \(cells[cellIndex!].col)\nposition: \(cells[cellIndex!].position)\nstatus: \(cells[cellIndex!].cellStatus)\ncolor: \(cells[cellIndex!].cellColor)\n\n")
-                                    //print("row: \(row), col \(col)")
+                                case .blue:
+                                    if blue.numPawnAvailable > 0{
+                                        if cells[cellIndex!].cellStatus == .neutral{
+                                            cells[cellIndex!].cellStatus = .blue
+                                            cells[cellIndex!].cellColor = Color("upBlue")
+                                            blue.numPawnAvailable -= 1
+                                            turn = .red
+                                        }
+                                    }
                                 }
-                                .foregroundColor(cells[cellIndex!].cellColor)
-                        }
+                            }
+                            .foregroundColor(cells[cellIndex!].cellColor)
                     }
+                }
             }
         }
         .overlay(){
@@ -50,22 +68,28 @@ struct BoardView: View {
                                 .frame(width: 40, height: 40)
                                 .background(Circle().fill(cells[subcellIndex!].cellColor))
                                 .onTapGesture{
-                                    switch cells[subcellIndex!].cellStatus{
-                                    case .neutral:
-                                        cells[subcellIndex!].cellStatus = .red
-                                        cells[subcellIndex!].cellColor = Color("downRed")
-                                    case .red:
-                                        cells[subcellIndex!].cellStatus = .blue
-                                        cells[subcellIndex!].cellColor = Color("downBlue")
-                                    case .blue:
-                                        cells[subcellIndex!].cellStatus = .neutral
-                                        cells[subcellIndex!].cellColor = Color("downNeutral")
-                                    }
                                     
-                                    //print("Cell info\nrow: \(subcell!.row)\ncol: \(subcell!.col)\nposition: \(subcell!.position)\nstatus: \(subcell!.cellStatus)\ncolor: \(subcell!.cellColor)\n\n")
-                                    //print("subfield row: \(subrow), col: \(subcol)")
+                                    switch turn{
+                                    case .red:
+                                        if red.numPawnAvailable > 0{
+                                            if cells[subcellIndex!].cellStatus == .neutral{
+                                                cells[subcellIndex!].cellStatus = .red
+                                                cells[subcellIndex!].cellColor = Color("upRed")
+                                                red.numPawnAvailable -= 1
+                                                turn = .blue
+                                            }
+                                        }
+                                    case .blue:
+                                        if blue.numPawnAvailable > 0{
+                                            if cells[subcellIndex!].cellStatus == .neutral{
+                                                cells[subcellIndex!].cellStatus = .blue
+                                                cells[subcellIndex!].cellColor = Color("upBlue")
+                                                blue.numPawnAvailable -= 1
+                                                turn = .red
+                                            }
+                                        }
+                                    }
                                 }
-                                //.foregroundColor(cells[subcellIndex!].cellColor)
                         }
                     }
                 }
@@ -106,6 +130,7 @@ struct BoardView_Previews: PreviewProvider {
         BoardCell(row: 3, col: 3, position: .down),
     ]
     static var previews: some View {
-        BoardView(cells: .constant(cells))
+        BoardView(board: .constant(Board()))
+            .previewDevice("iPhone 12 mini")
     }
 }

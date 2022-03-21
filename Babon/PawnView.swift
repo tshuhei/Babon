@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct PawnView: View {
-    var numPawnAvailable: Int
-    var numPawnUnavailable: Int
+    @Binding var numPawnAvailable: Int
+    var numPawnUnavailable: Int{
+        4 - numPawnAvailable
+    }
     var playerSide: PlayerSide
     
-    init(numPawnAvailable: Int, playerSide: PlayerSide){
-        self.numPawnAvailable = numPawnAvailable
+    init(numPawnAvailable: Binding<Int>, playerSide: PlayerSide){
+        self._numPawnAvailable = numPawnAvailable
         self.playerSide = playerSide
-        self.numPawnUnavailable = 4 - numPawnAvailable
     }
     
     var body: some View {
@@ -53,7 +54,7 @@ struct PawnView_Previews: PreviewProvider {
     static let numPawnAvailable = 3
     static let playerSide = PlayerSide.red
     static var previews: some View {
-        PawnView(numPawnAvailable: numPawnAvailable, playerSide: playerSide)
+        PawnView(numPawnAvailable: .constant(numPawnAvailable), playerSide: playerSide)
             .previewLayout(.fixed(width: 400, height: 70))
     }
 }
