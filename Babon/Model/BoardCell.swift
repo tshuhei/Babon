@@ -14,8 +14,10 @@ struct BoardCell{
     var cellStatus: CellStatus
     let position: CellPosition
     var cellColor: Color
+    var movable: [(Int, Int)]
+    var isMovable: Bool
     
-    init(row: Int, col: Int, position: CellPosition){
+    init(row: Int, col: Int, position: CellPosition, movable: [(Int, Int)]){
         self.row = row
         self.col = col
         self.position = position
@@ -25,5 +27,7 @@ struct BoardCell{
         }else{
             self.cellColor = Color("downNeutral")
         }
+        self.movable = movable
+        self.isMovable = false
     }
 }
