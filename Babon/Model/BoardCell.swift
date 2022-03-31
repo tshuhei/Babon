@@ -11,10 +11,10 @@ import SwiftUI
 struct BoardCell{
     let row: Int
     let col: Int
-    var cellStatus: CellStatus
+    let movable: [(Int, Int)]
     let position: CellPosition
+    var cellStatus: CellStatus
     var cellColor: Color
-    var movable: [(Int, Int)]
     var isMovable: Bool
     
     init(row: Int, col: Int, position: CellPosition, movable: [(Int, Int)]){

@@ -14,10 +14,12 @@ struct BoardView: View {
     @Binding var turn: PlayerSide
     @Binding var isFirst: Bool
     @Binding var isSelected: Bool
+    @Binding var isSandwitched: Bool
     @Binding var selectedRow: Int
     @Binding var selectedCol: Int
     @Binding var movablePos: [(Int, Int)]
     @Binding var selectedCellIdx: Int
+    @Binding var sandwitchedCellIdx: Int
     
     init(board: Binding<Board>){
         self._cells = board.cells
@@ -26,10 +28,12 @@ struct BoardView: View {
         self._turn = board.turn
         self._isFirst = board.isFirst
         self._isSelected = board.isSelected
+        self._isSandwitched = board.isSandwitdhed
         self._selectedRow = board.selectedRow
         self._selectedCol = board.selectedCol
         self._movablePos = board.movablePos
         self._selectedCellIdx = board.selectedCellIdx
+        self._sandwitchedCellIdx = board.sandwitchedCellIdx
     }
     
     private func findMovablePos(cells: [BoardCell], pos: CellPosition, selectedCellIdx: Int) -> [(Int, Int)]{
@@ -52,9 +56,102 @@ struct BoardView: View {
         }
     }
     
+    private func findSandwitch(cellIndex: Int, row: Int, col: Int, pos: CellPosition){
+        // start find sandwitched pawn
+        var idxList: [(Int,Int)] = []
+        for r in stride(from: row-2, to: row+3, by: 2){
+            for c in stride(from: col-2, to: col+3, by: 2){
+                if r == row && c == col{
+                    continue
+                }
+                switch pos{
+                case .up:
+                    if (0 < r && r < 5) && (0 < c && c < 5){
+                        idxList.append((r,c))
+                    }
+                case .down:
+                    if (0 < r && r < 4) && (0 < c && c < 4){
+                        idxList.append((r,c))
+                    }
+                }
+            }
+        }
+        //print(idxList)
+        for (r,c) in idxList{
+            var swedR: Int = -1 //row of sandwitched cell
+            var swedC: Int = -1 //col of sandwitched cell
+            //decide swedR
+            if row - r == -2{
+                swedR = row + 1
+            }else if row - r == 0{
+                swedR = row
+            }else{
+                swedR = row - 1
+            }
+            //decide swedC
+            if col - c == -2{
+                swedC = col + 1
+            }else if col - c == 0{
+                swedC = col
+            }else{
+                swedC = col - 1
+            }
+            //print("row \(row), col \(col)")
+            //print("swedR \(swedR), swedC \(swedC)")
+            //print()
+            let swIdx: Int = cells.firstIndex(where: {$0.row == r && $0.col == c && $0.position == pos})!
+            let swedIdx: Int = cells.firstIndex(where: {$0.row == swedR && $0.col == swedC && $0.position == pos})!
+            switch turn{
+            case .red:
+                if cells[swIdx].cellStatus == .red && cells[swedIdx].cellStatus == .blue{
+                    sandwitchedCellIdx = swedIdx
+                    isSandwitched = true
+                }
+            case .blue:
+                if cells[swIdx].cellStatus == .blue && cells[swedIdx].cellStatus == .red{
+                    sandwitchedCellIdx = swedIdx
+                    isSandwitched = true
+                }
+            }
+        }
+        print(sandwitchedCellIdx)
+        // end find sandwitched pawn
+        
+        if sandwitchedCellIdx != -1{
+            cells[sandwitchedCellIdx].cellColor = .black
+        }
+    }
+    
     private func cellTapGesture(cellIndex: Int, row: Int, col: Int, pos: CellPosition){
+        // if a sandwitched pawn is moved to a neutral cell
+        if isSandwitched && cells[cellIndex].cellStatus == .neutral{
+            cells[sandwitchedCellIdx].cellStatus = .neutral
+            switch turn{
+            case .red:
+                cells[cellIndex].cellStatus = .red
+                if pos == .up{
+                    cells[cellIndex].cellColor = Color("upRed")
+                }else{
+                    cells[cellIndex].cellColor = Color("downRed")
+                }
+            case .blue:
+                cells[cellIndex].cellStatus = .blue
+                if pos == .up{
+                    cells[cellIndex].cellColor = Color("upBlue")
+                }else{
+                    cells[cellIndex].cellColor = Color("upBlue")
+                }
+            }
+            if cells[sandwitchedCellIdx].position == .up{
+                cells[sandwitchedCellIdx].cellColor = Color("upNeutral")
+            }else{
+                cells[sandwitchedCellIdx].cellColor = Color("downNeutral")
+            }
+            isSandwitched = false
+            sandwitchedCellIdx = -1
+        }
         // if no pawn is available
-        if (turn == .red && red.numPawnAvailable == 0) || (turn == .blue && blue.numPawnAvailable == 0){
+        else if (turn == .red && red.numPawnAvailable == 0) || (turn == .blue && blue.numPawnAvailable == 0){
             // if the tapped cell is the player's cell and if no pawn is selected yet...
             if ((cells[cellIndex].cellStatus == .red && turn == .red) || (cells[cellIndex].cellStatus == .blue && turn == .blue)) && !isSelected{
                 cells[cellIndex].cellColor = .black
@@ -84,6 +181,7 @@ struct BoardView: View {
                         cells[cellIndex].cellColor = Color("downRed")
                         cells[selectedCellIdx].cellColor = Color("upNeutral")
                     }
+                    findSandwitch(cellIndex: cellIndex, row: row, col: col, pos: pos)
                     turn = .blue
                 case .blue:
                     cells[cellIndex].cellStatus = .blue
@@ -96,6 +194,7 @@ struct BoardView: View {
                         cells[selectedCellIdx].cellColor = Color("upNeutral")
 
                     }
+                    findSandwitch(cellIndex: cellIndex, row: row, col: col, pos: pos)
                     turn = .red
                 }
             // if the player cancel the cell transition...
@@ -117,16 +216,9 @@ struct BoardView: View {
                 isSelected = false
                 resetMovable()
             }
-            
-            // if a pawn is already selected and if the tapped cell is movable...
-            /*if isSelected && (movablePos.contains(where:{
-                $0.0 == row && $0.1 == col})){
-                //print("ok")
-            }*/
-        }else{
-        if isFirst && ((row != 2 && row != 3) || (col != 2 && col != 3)){
+        }else if isFirst && ((row != 2 && row != 3) || (col != 2 && col != 3)){
             return
-        }
+        }else{
         
         switch turn{
         case .red:
@@ -139,6 +231,7 @@ struct BoardView: View {
                         cells[cellIndex].cellColor = Color("downRed")
                     }
                     red.numPawnAvailable -= 1
+                    findSandwitch(cellIndex: cellIndex, row: row, col: col, pos: pos)
                     turn = .blue
                 }
             }
@@ -152,13 +245,14 @@ struct BoardView: View {
                         cells[cellIndex].cellColor = Color("downBlue")
                     }
                     blue.numPawnAvailable -= 1
+                    findSandwitch(cellIndex: cellIndex, row: row, col: col, pos: pos)
                     turn = .red
                 }
             }
         }
+        }
         if isFirst{
             isFirst = false
-        }
         }
     }
     

@@ -14,10 +14,12 @@ struct Board{
     var turn: PlayerSide
     var isFirst: Bool
     var isSelected: Bool
+    var isSandwitdhed: Bool
     var selectedRow: Int
     var selectedCol: Int
     var movablePos: [(Int, Int)] //(row, col)
     var selectedCellIdx: Int
+    var sandwitchedCellIdx: Int
     
     init(){
         self.cells = [
@@ -53,9 +55,11 @@ struct Board{
         self.turn = .blue
         self.isFirst = true
         self.isSelected = false
+        self.isSandwitdhed = false
         self.selectedRow = -1
         self.selectedCol = -1
         self.movablePos = []
         self.selectedCellIdx = -1
+        self.sandwitchedCellIdx = -1
     }
 }
