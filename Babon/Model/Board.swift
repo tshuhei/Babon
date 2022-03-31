@@ -20,6 +20,7 @@ struct Board{
     var movablePos: [(Int, Int)] //(row, col)
     var selectedCellIdx: Int
     var sandwitchedCellIdx: Int
+    var isWinner: Bool
     
     init(){
         self.cells = [
@@ -61,5 +62,6 @@ struct Board{
         self.movablePos = []
         self.selectedCellIdx = -1
         self.sandwitchedCellIdx = -1
+        self.isWinner = false
     }
 }

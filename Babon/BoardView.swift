@@ -20,6 +20,7 @@ struct BoardView: View {
     @Binding var movablePos: [(Int, Int)]
     @Binding var selectedCellIdx: Int
     @Binding var sandwitchedCellIdx: Int
+    @Binding var isWinner: Bool
     
     init(board: Binding<Board>){
         self._cells = board.cells
@@ -34,6 +35,7 @@ struct BoardView: View {
         self._movablePos = board.movablePos
         self._selectedCellIdx = board.selectedCellIdx
         self._sandwitchedCellIdx = board.sandwitchedCellIdx
+        self._isWinner = board.isWinner
     }
     
     private func findMovablePos(cells: [BoardCell], pos: CellPosition, selectedCellIdx: Int) -> [(Int, Int)]{
@@ -52,6 +54,149 @@ struct BoardView: View {
     private func resetMovable(){
         for i in 0..<(cells.count){
             cells[i].isMovable = false
+        }
+    }
+    
+    private func judgeWinner(cellIndex: Int, row: Int, col: Int, pos: CellPosition){
+        judgeHorizontal(cellIndex: cellIndex, row: row, col: col, pos: pos)
+        judgeVertical(cellIndex: cellIndex, row: row, col: col, pos: pos)
+        judgeTopLeft(cellIndex: cellIndex, row: row, col: col, pos: pos)
+        judgeTopRight(cellIndex: cellIndex, row: row, col: col, pos: pos)
+        if isWinner{
+            print("\(turn) Win!")
+            isWinner = false
+        }
+    }
+    
+    private func judgeHorizontal(cellIndex: Int, row: Int, col: Int, pos: CellPosition){
+        var horcol: Int = col - 1
+        var limcol: Int = 4
+        var numPlayerPawn: Int = 1
+        if pos == .down{
+            limcol = 3
+        }
+        while horcol >= 1{
+            let idx: Int = cells.firstIndex(where: {$0.row == row && $0.col == horcol && $0.position == pos})!
+            if (cells[idx].cellStatus == .red && turn == .red) || (cells[idx].cellStatus == .blue && turn == .blue){
+                horcol -= 1
+                numPlayerPawn += 1
+            }else{
+                break
+            }
+        }
+        horcol = col + 1
+        while horcol <= limcol{
+            let idx: Int = cells.firstIndex(where: {$0.row == row && $0.col == horcol && $0.position == pos})!
+            if (cells[idx].cellStatus == .red && turn == .red) || (cells[idx].cellStatus == .blue && turn == .blue){
+                horcol += 1
+                numPlayerPawn += 1
+            }else{
+                break
+            }
+        }
+        if numPlayerPawn == 3{
+            isWinner = true
+        }
+    }
+    
+    private func judgeVertical(cellIndex: Int, row: Int, col: Int, pos: CellPosition){
+        var verrow: Int = row - 1
+        var limrow: Int = 4
+        var numPlayerPawn: Int = 1
+        if pos == .down{
+            limrow = 3
+        }
+        while verrow >= 1{
+            let idx: Int = cells.firstIndex(where: {$0.row == verrow && $0.col == col && $0.position == pos})!
+            if (cells[idx].cellStatus == .red && turn == .red) || (cells[idx].cellStatus == .blue && turn == .blue){
+                verrow -= 1
+                numPlayerPawn += 1
+            }else{
+                break
+            }
+        }
+        verrow = row + 1
+        while verrow <= limrow{
+            let idx: Int = cells.firstIndex(where: {$0.row == verrow && $0.col == col && $0.position == pos})!
+            if (cells[idx].cellStatus == .red && turn == .red) || (cells[idx].cellStatus == .blue && turn == .blue){
+                verrow += 1
+                numPlayerPawn += 1
+            }else{
+                break
+            }
+        }
+        if numPlayerPawn == 3{
+            isWinner = true
+        }
+    }
+    
+    private func judgeTopLeft(cellIndex: Int, row: Int, col: Int, pos: CellPosition){
+        var diagrow: Int = row - 1
+        var diagcol: Int = col - 1
+        var lim: Int = 4
+        var numPlayerPawn: Int = 1
+        if pos == .down{
+            lim = 3
+        }
+        while diagrow >= 1 && diagcol >= 1{
+            let idx: Int = cells.firstIndex(where: {$0.row == diagrow && $0.col == diagcol && $0.position == pos})!
+            if (cells[idx].cellStatus == .red && turn == .red) || (cells[idx].cellStatus == .blue && turn == .blue){
+                diagrow -= 1
+                diagcol -= 1
+                numPlayerPawn += 1
+            }else{
+                break
+            }
+        }
+        diagrow = row + 1
+        diagcol = col + 1
+        while diagrow <= lim && diagcol <= lim{
+            let idx: Int = cells.firstIndex(where: {$0.row == diagrow && $0.col == diagcol && $0.position == pos})!
+            if (cells[idx].cellStatus == .red && turn == .red) || (cells[idx].cellStatus == .blue && turn == .blue){
+                diagrow += 1
+                diagcol += 1
+                numPlayerPawn += 1
+            }else{
+                break
+            }
+        }
+        if numPlayerPawn == 3{
+            isWinner = true
+        }
+    }
+    
+    private func judgeTopRight(cellIndex: Int, row: Int, col: Int, pos: CellPosition){
+        var diagrow: Int = row - 1
+        var diagcol: Int = col + 1
+        var lim: Int = 4
+        var numPlayerPawn: Int = 1
+        if pos == .down{
+            lim = 3
+        }
+        while diagrow >= 1 && diagcol <= lim{
+            let idx: Int = cells.firstIndex(where: {$0.row == diagrow && $0.col == diagcol && $0.position == pos})!
+            if (cells[idx].cellStatus == .red && turn == .red) || (cells[idx].cellStatus == .blue && turn == .blue){
+                diagrow -= 1
+                diagcol += 1
+                numPlayerPawn += 1
+            }else{
+                break
+            }
+        }
+        diagrow = row + 1
+        diagcol = col - 1
+        while diagrow <= lim && diagcol >= 1{
+            let idx: Int = cells.firstIndex(where: {$0.row == diagrow && $0.col == diagcol && $0.position == pos})!
+            if (cells[idx].cellStatus == .red && turn == .red) || (cells[idx].cellStatus == .blue && turn == .blue){
+                diagrow += 1
+                diagcol -= 1
+                numPlayerPawn += 1
+            }else{
+                break
+            }
+        }
+        if numPlayerPawn == 3{
+            isWinner = true
         }
     }
     
@@ -186,8 +331,8 @@ struct BoardView: View {
                     }else{
                         cells[cellIndex].cellColor = Color("downBlue")
                         cells[selectedCellIdx].cellColor = Color("upNeutral")
-
                     }
+                    judgeWinner(cellIndex: cellIndex, row: row, col: col, pos: pos)
                     findSandwitch(cellIndex: cellIndex, row: row, col: col, pos: pos)
                     turn = .red
                 }
@@ -225,6 +370,7 @@ struct BoardView: View {
                         cells[cellIndex].cellColor = Color("downRed")
                     }
                     red.numPawnAvailable -= 1
+                    judgeWinner(cellIndex: cellIndex, row: row, col: col, pos: pos)
                     findSandwitch(cellIndex: cellIndex, row: row, col: col, pos: pos)
                     turn = .blue
                 }
@@ -239,6 +385,7 @@ struct BoardView: View {
                         cells[cellIndex].cellColor = Color("downBlue")
                     }
                     blue.numPawnAvailable -= 1
+                    judgeWinner(cellIndex: cellIndex, row: row, col: col, pos: pos)
                     findSandwitch(cellIndex: cellIndex, row: row, col: col, pos: pos)
                     turn = .red
                 }
@@ -277,8 +424,8 @@ struct BoardView: View {
                                     .stroke(Color("downRed"), lineWidth: 5)
                                     .frame(width: 55, height: 55)
                             }
-                            Text(cells[cellIndex!].cellStatus.rawValue)
-                                .font(.footnote)
+                            //Text(cells[cellIndex!].cellStatus.rawValue)
+                                //.font(.footnote)
                         }
                     }
                 }
@@ -305,8 +452,8 @@ struct BoardView: View {
                                         .stroke(Color("downRed"), lineWidth: 6)
                                         .frame(width: 35, height: 35)
                                 }
-                                Text(cells[subcellIndex!].cellStatus.rawValue)
-                                    .font(.footnote)
+                                //Text(cells[subcellIndex!].cellStatus.rawValue)
+                                    //.font(.footnote)
                             }
                         }
                     }
