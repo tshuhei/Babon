@@ -23,6 +23,11 @@ struct StartView: View {
                 PawnView(numPawnAvailable: $board.blue.numPawnAvailable, playerSide: .blue)
             }
             
+            if board.isWinner{
+                WinnerView(winner: $board.winner)
+                    .edgesIgnoringSafeArea(.all)
+            }
+
             Button(
                 action: {
                     dismiss()

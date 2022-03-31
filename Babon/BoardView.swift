@@ -12,6 +12,7 @@ struct BoardView: View {
     @Binding var red: Player
     @Binding var blue: Player
     @Binding var turn: PlayerSide
+    @Binding var winner: PlayerSide
     @Binding var isFirst: Bool
     @Binding var isSelected: Bool
     @Binding var isSandwitched: Bool
@@ -27,6 +28,7 @@ struct BoardView: View {
         self._red = board.red
         self._blue = board.blue
         self._turn = board.turn
+        self._winner = board.winner
         self._isFirst = board.isFirst
         self._isSelected = board.isSelected
         self._isSandwitched = board.isSandwitdhed
@@ -63,8 +65,8 @@ struct BoardView: View {
         judgeTopLeft(cellIndex: cellIndex, row: row, col: col, pos: pos)
         judgeTopRight(cellIndex: cellIndex, row: row, col: col, pos: pos)
         if isWinner{
-            print("\(turn) Win!")
-            isWinner = false
+            winner = turn
+            //print("\(turn) Win!")
         }
     }
     
@@ -466,6 +468,5 @@ struct BoardView: View {
 struct BoardView_Previews: PreviewProvider {
     static var previews: some View {
         BoardView(board: .constant(Board()))
-            .previewDevice("iPhone 12 mini")
     }
 }

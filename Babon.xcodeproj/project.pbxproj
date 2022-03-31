@@ -24,6 +24,7 @@
 		71204A8C27E74E0E003B1972 /* CellStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A8B27E74E0E003B1972 /* CellStatus.swift */; };
 		71204A8E27E74F75003B1972 /* CellPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A8D27E74F74003B1972 /* CellPosition.swift */; };
 		71204A9027E8A43F003B1972 /* TurnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A8F27E8A43F003B1972 /* TurnView.swift */; };
+		71204A9227F59E70003B1972 /* WinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A9127F59E70003B1972 /* WinnerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		71204A8B27E74E0E003B1972 /* CellStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellStatus.swift; sourceTree = "<group>"; };
 		71204A8D27E74F74003B1972 /* CellPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellPosition.swift; sourceTree = "<group>"; };
 		71204A8F27E8A43F003B1972 /* TurnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnView.swift; sourceTree = "<group>"; };
+		71204A9127F59E70003B1972 /* WinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				71204A6A27E6BC95003B1972 /* Assets.xcassets */,
 				71204A6C27E6BC95003B1972 /* Preview Content */,
 				71204A7527E6BF44003B1972 /* StartView.swift */,
+				71204A9127F59E70003B1972 /* WinnerView.swift */,
 				71204A8F27E8A43F003B1972 /* TurnView.swift */,
 				71204A8727E6D82F003B1972 /* BoardView.swift */,
 				71204A7727E6CC1B003B1972 /* HowToPlayView.swift */,
@@ -193,6 +196,7 @@
 				71204A8027E6D0A2003B1972 /* Player.swift in Sources */,
 				71204A8C27E74E0E003B1972 /* CellStatus.swift in Sources */,
 				71204A7627E6BF44003B1972 /* StartView.swift in Sources */,
+				71204A9227F59E70003B1972 /* WinnerView.swift in Sources */,
 				71204A9027E8A43F003B1972 /* TurnView.swift in Sources */,
 				71204A6927E6BC8D003B1972 /* StartMenuView.swift in Sources */,
 				71204A6727E6BC8D003B1972 /* BabonApp.swift in Sources */,

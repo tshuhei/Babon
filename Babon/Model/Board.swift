@@ -12,6 +12,7 @@ struct Board{
     var red: Player
     var blue: Player
     var turn: PlayerSide
+    var winner: PlayerSide
     var isFirst: Bool
     var isSelected: Bool
     var isSandwitdhed: Bool
@@ -54,6 +55,7 @@ struct Board{
         self.red = Player(side: .red)
         self.blue = Player(side: .blue)
         self.turn = .blue
+        self.winner = .blue
         self.isFirst = true
         self.isSelected = false
         self.isSandwitdhed = false
