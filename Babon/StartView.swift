@@ -23,20 +23,42 @@ struct StartView: View {
                 PawnView(numPawnAvailable: $board.blue.numPawnAvailable, playerSide: .blue)
             }
             
+                
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(
+                        action: {
+                            board = Board()
+                        }, label: {
+                            Text("Reset")
+                        }
+                    )
+                    .tint(.black)
+                }
+                Spacer()
+            }
+            .padding(.trailing)
+            
             if board.isWinner{
-                WinnerView(winner: $board.winner)
-                    .edgesIgnoringSafeArea(.all)
+                WinnerView(winner: $board.winner, board: $board)
             }
 
-            Button(
-                action: {
-                    dismiss()
-                }, label: {
-                    Image(systemName: "arrow.backward")
+            VStack {
+                HStack {
+                    Button(
+                        action: {
+                            dismiss()
+                        }, label: {
+                            Image(systemName: "arrow.backward")
+                        }
+                    )
+                    .tint(.black)
+                    Spacer()
                 }
-            )
-            .tint(.black)
-            .position(x: 20, y: 10)
+                Spacer()
+            }
+            .padding(.leading)
         }
         .navigationBarHidden(true)
     }
