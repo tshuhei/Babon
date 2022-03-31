@@ -46,7 +46,6 @@ struct BoardView: View {
                 ret.append((row,col))
             }
         }
-        //print()
         return ret
     }
     
@@ -76,7 +75,6 @@ struct BoardView: View {
                 }
             }
         }
-        //print(idxList)
         for (r,c) in idxList{
             var swedR: Int = -1 //row of sandwitched cell
             var swedC: Int = -1 //col of sandwitched cell
@@ -96,9 +94,6 @@ struct BoardView: View {
             }else{
                 swedC = col - 1
             }
-            //print("row \(row), col \(col)")
-            //print("swedR \(swedR), swedC \(swedC)")
-            //print()
             let swIdx: Int = cells.firstIndex(where: {$0.row == r && $0.col == c && $0.position == pos})!
             let swedIdx: Int = cells.firstIndex(where: {$0.row == swedR && $0.col == swedC && $0.position == pos})!
             switch turn{
@@ -114,7 +109,6 @@ struct BoardView: View {
                 }
             }
         }
-        print(sandwitchedCellIdx)
         // end find sandwitched pawn
         
         if sandwitchedCellIdx != -1{
@@ -268,59 +262,7 @@ struct BoardView: View {
                                 .cornerRadius(6)
                                 .frame(width: 60, height: 60)
                                 .onTapGesture {
-                                    
                                     cellTapGesture(cellIndex: cellIndex!, row: row, col: col, pos: .up)
-                                    
-                                    /*// if no pawn is available
-                                    if (turn == .red && red.numPawnAvailable == 0) || (turn == .blue && blue.numPawnAvailable == 0){
-                                        // if the tapped cell is the player's cell and if no pawn is selected yet...
-                                        if ((cells[cellIndex!].cellStatus == .red && turn == .red) || (cells[cellIndex!].cellStatus == .blue && turn == .blue)) && !isSelected{
-                                            cells[cellIndex!].cellColor = .black
-                                            isSelected = true
-                                            selectedRow = row
-                                            selectedCol = col
-                                            movablePos = findMovablePos(cells: cells, selectedRow: selectedRow, selectedCol: selectedCol)
-                                            for (pr, pc) in movablePos{
-                                                print("\(pr):\(pc)")
-                                                let idx: Int? = cells.firstIndex(where: {$0.row == pr && $0.col == pc && $0.position == .down})
-                                                cells[idx!].isMovable = true
-                                            }
-                                        }
-                                        
-                                        // if a pawn is already selected and if the tapped cell is movable...
-                                        if isSelected && (movablePos.contains(where:{
-                                            $0.0 == row && $0.1 == col})){
-                                            print("ok")
-                                        }
-                                    }else{
-                                    if isFirst && ((row != 2 && row != 3) || (col != 2 && col != 3)){
-                                        return
-                                    }
-                                    
-                                    switch turn{
-                                    case .red:
-                                        if red.numPawnAvailable > 0{
-                                            if cells[cellIndex!].cellStatus == .neutral{
-                                                cells[cellIndex!].cellStatus = .red
-                                                cells[cellIndex!].cellColor = Color("upRed")
-                                                red.numPawnAvailable -= 1
-                                                turn = .blue
-                                            }
-                                        }
-                                    case .blue:
-                                        if blue.numPawnAvailable > 0{
-                                            if cells[cellIndex!].cellStatus == .neutral{
-                                                cells[cellIndex!].cellStatus = .blue
-                                                cells[cellIndex!].cellColor = Color("upBlue")
-                                                blue.numPawnAvailable -= 1
-                                                turn = .red
-                                            }
-                                        }
-                                    }
-                                    if isFirst{
-                                        isFirst = false
-                                    }
-                                    }*/
                                 }
                                 .foregroundColor(cells[cellIndex!].cellColor)
                             if (row == 2 || row == 3) && (col == 2 || col == 3){
@@ -355,29 +297,7 @@ struct BoardView: View {
                                     .background(Circle().fill(cells[subcellIndex!].cellColor))
                                     .onTapGesture{
                                         if !isFirst{
-                                            
                                             cellTapGesture(cellIndex: subcellIndex!, row: subrow, col: subcol, pos: .down)
-                                            
-                                            /*switch turn{
-                                            case .red:
-                                                if red.numPawnAvailable > 0{
-                                                    if cells[subcellIndex!].cellStatus == .neutral{
-                                                        cells[subcellIndex!].cellStatus = .red
-                                                        cells[subcellIndex!].cellColor = Color("upRed")
-                                                        red.numPawnAvailable -= 1
-                                                        turn = .blue
-                                                    }
-                                                }
-                                            case .blue:
-                                                if blue.numPawnAvailable > 0{
-                                                    if cells[subcellIndex!].cellStatus == .neutral{
-                                                        cells[subcellIndex!].cellStatus = .blue
-                                                        cells[subcellIndex!].cellColor = Color("upBlue")
-                                                        blue.numPawnAvailable -= 1
-                                                        turn = .red
-                                                    }
-                                                }
-                                            }*/
                                         }
                                 }
                                 if (cells[subcellIndex!].isMovable){
