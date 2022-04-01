@@ -25,9 +25,13 @@
 		71204A8E27E74F75003B1972 /* CellPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A8D27E74F74003B1972 /* CellPosition.swift */; };
 		71204A9027E8A43F003B1972 /* TurnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A8F27E8A43F003B1972 /* TurnView.swift */; };
 		71204A9227F59E70003B1972 /* WinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71204A9127F59E70003B1972 /* WinnerView.swift */; };
+		71204A9427F692B0003B1972 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71204A9327F692AF003B1972 /* GoogleService-Info.plist */; };
+		EAAEA4AEB0489A3046101C82 /* Pods_Babon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FB2577B31AE83B72C9CB836 /* Pods_Babon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		096763C2A424AC794618F4E2 /* Pods-Babon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Babon.debug.xcconfig"; path = "Target Support Files/Pods-Babon/Pods-Babon.debug.xcconfig"; sourceTree = "<group>"; };
+		6FB2577B31AE83B72C9CB836 /* Pods_Babon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Babon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71204A6327E6BC8D003B1972 /* Babon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Babon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71204A6627E6BC8D003B1972 /* BabonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabonApp.swift; sourceTree = "<group>"; };
 		71204A6827E6BC8D003B1972 /* StartMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenuView.swift; sourceTree = "<group>"; };
@@ -47,6 +51,8 @@
 		71204A8D27E74F74003B1972 /* CellPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellPosition.swift; sourceTree = "<group>"; };
 		71204A8F27E8A43F003B1972 /* TurnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnView.swift; sourceTree = "<group>"; };
 		71204A9127F59E70003B1972 /* WinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerView.swift; sourceTree = "<group>"; };
+		71204A9327F692AF003B1972 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D39F066CF2EDC729E2638A48 /* Pods-Babon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Babon.release.xcconfig"; path = "Target Support Files/Pods-Babon/Pods-Babon.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAAEA4AEB0489A3046101C82 /* Pods_Babon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +72,8 @@
 			children = (
 				71204A6527E6BC8D003B1972 /* Babon */,
 				71204A6427E6BC8D003B1972 /* Products */,
+				FE6510D809860F37F7E538BA /* Pods */,
+				F1A418787A8BCC35D5A932B0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,6 +100,7 @@
 				71204A8727E6D82F003B1972 /* BoardView.swift */,
 				71204A7727E6CC1B003B1972 /* HowToPlayView.swift */,
 				71204A7927E6CC42003B1972 /* MultiPlayView.swift */,
+				71204A9327F692AF003B1972 /* GoogleService-Info.plist */,
 			);
 			path = Babon;
 			sourceTree = "<group>";
@@ -117,6 +127,24 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		F1A418787A8BCC35D5A932B0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6FB2577B31AE83B72C9CB836 /* Pods_Babon.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FE6510D809860F37F7E538BA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				096763C2A424AC794618F4E2 /* Pods-Babon.debug.xcconfig */,
+				D39F066CF2EDC729E2638A48 /* Pods-Babon.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -124,9 +152,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 71204A7127E6BC95003B1972 /* Build configuration list for PBXNativeTarget "Babon" */;
 			buildPhases = (
+				C0FA3FD69242D34DEF1A84E7 /* [CP] Check Pods Manifest.lock */,
 				71204A5F27E6BC8D003B1972 /* Sources */,
 				71204A6027E6BC8D003B1972 /* Frameworks */,
 				71204A6127E6BC8D003B1972 /* Resources */,
+				FD70854CF8756271756E0B99 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -177,10 +207,53 @@
 			files = (
 				71204A6E27E6BC95003B1972 /* Preview Assets.xcassets in Resources */,
 				71204A6B27E6BC95003B1972 /* Assets.xcassets in Resources */,
+				71204A9427F692B0003B1972 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C0FA3FD69242D34DEF1A84E7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Babon-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FD70854CF8756271756E0B99 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Babon/Pods-Babon-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Babon/Pods-Babon-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Babon/Pods-Babon-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		71204A5F27E6BC8D003B1972 /* Sources */ = {
@@ -325,6 +398,7 @@
 		};
 		71204A7227E6BC95003B1972 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 096763C2A424AC794618F4E2 /* Pods-Babon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -354,6 +428,7 @@
 		};
 		71204A7327E6BC95003B1972 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D39F066CF2EDC729E2638A48 /* Pods-Babon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
