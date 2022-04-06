@@ -17,7 +17,7 @@ struct MultiPlayView: View {
     let functions = Functions.functions()
     
     init(){
-        functions.useEmulator(withHost: "localhost", port: 5001)
+        //functions.useEmulator(withHost: "localhost", port: 5001)
     }
     
     var body: some View {
@@ -103,6 +103,21 @@ struct MultiPlayView: View {
                 
                 Text(statusText)
                 Spacer()
+                
+                Button(action: {
+                    functions.httpsCallable("fcmTest").call(["body": "Shuhei"]){ result, error in
+                        if let error = error{
+                            debugPrint(error.localizedDescription)
+                        }else{
+                        let data = result?.data as? [String: Any]
+                        let message = (data?["message"] as? String)!
+                        print("this is data")
+                        print(message)
+                        }
+                    }
+                }, label: {
+                    Text("FCM TEST")
+                })
             }
             .navigationBarHidden(true)
             

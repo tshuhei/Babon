@@ -78,7 +78,12 @@ struct BabonApp: App {
         
         func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
             let userInfo = notification.request.content.userInfo
-            print(userInfo)
+            //print(userInfo)
+            let aps = userInfo["aps"] as! NSDictionary
+            let alert = aps["alert"] as! NSDictionary
+            let body = alert["body"]!
+            print("This is message")
+            print(body)
             completionHandler([])
            }
         
