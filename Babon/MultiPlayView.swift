@@ -11,7 +11,9 @@ import FirebaseFunctions
 struct MultiPlayView: View {
     @Environment(\.dismiss) var dismiss
     @State private var roomID = ""
-    @State private var labelStr: String = "default"
+    @State private var statusText: String = ""
+    @State private var inputDisable: Bool = false
+    @State private var isMove: Bool = false
     let functions = Functions.functions()
     
     init(){
@@ -20,28 +22,87 @@ struct MultiPlayView: View {
     
     var body: some View {
         ZStack {
+            NavigationLink(destination: StartView(), isActive: $isMove){
+                EmptyView()
+            }
             VStack{
                 Spacer()
                 TextField("Input roomID", text: $roomID)
                                 .padding()
                                 .multilineTextAlignment(.center)
+                                .disabled(inputDisable)
+                
                 Spacer()
                     .frame(height: 50)
+                
                 Button(action: {
                     print(roomID)
-                    functions.httpsCallable("helloWorld").call(["text": roomID]){ result, error in
+                    inputDisable = true
+                    statusText = "Making Room: \(roomID)"
+                    functions.httpsCallable("makeRoom").call(["roomID": roomID]){ result, error in
                         if let error = error{
                             debugPrint(error.localizedDescription)
                         }else{
-                            labelStr = result!.data as! String
+                        let data = result?.data as? [String: Any]
+                        let message = (data?["message"] as? String)!
+                        let status = (data?["status"] as? Int)!
+                        print(message)
+                        print(String(status))
+                        // if the room is successfully made
+                        if (status) == 1{
+                            statusText = message
+                            isMove = true
+                        }
+                        // if the room already exists
+                        else if (status) == 2{
+                            statusText = message
+                            inputDisable = false
+                        }
                         }
                     }
                 }, label: {
-                    Text("Connect")
+                    Text("Make room")
                 })
+                .disabled(inputDisable)
+                
                 Spacer()
-                Text(labelStr)
-
+                    .frame(height: 30)
+                
+                Button(action: {
+                    inputDisable = true
+                    statusText = "Connecting Room: \(roomID)"
+                    print(roomID)
+                    functions.httpsCallable("connectRoom").call(["roomID": roomID]){ result, error in
+                        if let error = error{
+                            debugPrint(error.localizedDescription)
+                        }else{
+                            let data = result?.data as? [String: Any]
+                            let message = (data?["message"] as? String)!
+                            let status = (data?["status"] as? Int)!
+                            print(message)
+                            print(String(status))
+                            // if the connection is successfully made
+                            if (status) == 1{
+                                statusText = message
+                                isMove = true
+                            }
+                            // if the room doesn't exist
+                            else if (status) == 2{
+                                statusText = message
+                                inputDisable = false
+                            }
+                        }
+                    }
+                }, label: {
+                    Text("Connect room")
+                })
+                .disabled(inputDisable)
+                
+                Spacer()
+                    .frame(height: 30)
+                
+                Text(statusText)
+                Spacer()
             }
             .navigationBarHidden(true)
             
